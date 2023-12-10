@@ -30,14 +30,14 @@ spec:
   tls:
   {{- range .Values.ingress.hosts }}
   - hosts:
-    - {{ .name }}
+    - dronedelivery.fabrikam.com
   {{- if .tlsSecretName }}
     secretName: {{ $relname }}-{{ .tlsSecretName }}
   {{- end }}
   {{- end }}
   rules:
   {{- range .Values.ingress.hosts }}
-  - host: {{ .name }}
+  - host: dronedelivery.fabrikam.com
     http:
       paths:
       {{- if .path }}
