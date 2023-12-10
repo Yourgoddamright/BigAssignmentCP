@@ -8,7 +8,7 @@
 ###################################################################################################
 {{- $fullname := include "delivery.fullname" . | replace "." "" }}
 apiVersion: "aadpodidentity.k8s.io/v1"
-kind: List
+kind: azureIdentities
 items:
   - apiVersion: "aadpodidentity.k8s.io/v1"
     kind: AzureIdentity
