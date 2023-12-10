@@ -24,8 +24,6 @@ items:
     metadata:
       name: {{ $fullname }}-identity-binding
       namespace: {{ $fullname }}-namespace
-      labels:
-        {{- include "aad-pod-identity.labels" $ | nindent 8 }}
     spec:
       azureIdentity: {{ $fullname }}-identity
       selector: {{ $fullname }}
