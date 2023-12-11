@@ -1,0 +1,86 @@
+# delivery-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: delivery-v0.1.0-dev
+  namespace: backend-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: delivery
+  template:
+    metadata:
+      labels:
+        app: delivery
+    spec:
+      containers:
+      - name: fabrikam-delivery
+        image: tsbwpdz6lzcg2.azurecr.io/delivery:0.1.0
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "350Mi"
+          limits:
+            cpu: "200m"
+            memory: "500Mi"
+        env:
+        - name: IDENTITY_CLIENT_ID
+          value: "$DELIVERY_PRINCIPAL_CLIENT_ID"
+        - name: IDENTITY_RESOURCE_ID
+          value: "$DELIVERY_PRINCIPAL_RESOURCE_ID"
+        - name: COSMOSDB_ID
+          value: "$DELIVERY_DATABASE_NAME"
+        - name: COSMOSDB_COLLECTION_ID
+          value: "$DELIVERY_COLLECTION_NAME"
+        - name: REASON
+          value: "Initial deployment"
+        - name: ENVS_DEV
+          value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: delivery
+  namespace: backend-dev
+spec:
+  selector:
+    app: delivery
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress
+  namespace: backend-dev
+spec:
+  podSelector:
+    matchLabels:
+      app: delivery
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - ipBlock:
+        cidr: "$CLUSTER_SUBNET_PREFIX"
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress
+  namespace: backend-dev
+spec:
+  podSelector:
+    matchLabels:
+      app: delivery
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: "$GATEWAY_SUBNET_PREFIX"
