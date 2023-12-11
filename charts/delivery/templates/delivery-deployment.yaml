@@ -15,7 +15,6 @@ spec:
       labels:
         app: delivery
     spec:
-      restartPolicy: Never
       containers:
       - name: fabrikam-delivery
         image: tsbwpdz6lzcg2.azurecr.io/delivery:0.1.0
@@ -48,7 +47,6 @@ metadata:
   name: delivery
   namespace: backend-dev
 spec:
-  restartPolicy: Never
   selector:
     app: delivery
   ports:
@@ -62,7 +60,6 @@ metadata:
   name: allow-egress
   namespace: backend-dev
 spec:
-  restartPolicy: Never
   podSelector:
     matchLabels:
       app: delivery
@@ -79,7 +76,6 @@ metadata:
   name: allow-ingress
   namespace: backend-dev
 spec:
-  restartPolicy: Never
   podSelector:
     matchLabels:
       app: delivery
