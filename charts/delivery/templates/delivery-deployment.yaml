@@ -28,13 +28,13 @@ spec:
             memory: "500Mi"
         env:
         - name: IDENTITY_CLIENT_ID
-          value: "$DELIVERY_PRINCIPAL_CLIENT_ID"
+          value: "b119ba51-bed8-41d5-b431-352ae1d939e5"
         - name: IDENTITY_RESOURCE_ID
-          value: "$DELIVERY_PRINCIPAL_RESOURCE_ID"
+          value: "/subscriptions/6c7fe35c-5b46-4d5d-8309-d406d9bf864b/resourceGroups/rg-shipping-dronedelivery/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dev-d"
         - name: COSMOSDB_ID
-          value: "$DELIVERY_DATABASE_NAME"
+          value: "d-utmp26hh455de"
         - name: COSMOSDB_COLLECTION_ID
-          value: "$DELIVERY_COLLECTION_NAME"
+          value: "d-utmp26hh455de-col"
         - name: REASON
           value: "Initial deployment"
         - name: ENVS_DEV
@@ -67,7 +67,7 @@ spec:
   egress:
   - to:
     - ipBlock:
-        cidr: "$CLUSTER_SUBNET_PREFIX"
+        cidr: "10.240.0.0/22"
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -83,4 +83,4 @@ spec:
   ingress:
   - from:
     - ipBlock:
-        cidr: "$GATEWAY_SUBNET_PREFIX"
+        cidr: "10.240.4.16/28"
