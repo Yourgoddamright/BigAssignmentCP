@@ -14,6 +14,7 @@ spec:
       labels:
         app: delivery
     spec:
+      restartPolicy: Never
       containers:
       - name: fabrikam-delivery
         image: tsbwpdz6lzcg2.azurecr.io/delivery:0.1.0
