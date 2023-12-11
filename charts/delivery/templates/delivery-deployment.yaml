@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: fabrikam-delivery
-        image: tsbwpdz6lzcg2.azurecr.io/delivery:0.1.0
+        image: tsbwpdz6lzcg2.azurecr.io/delivery:v0.1.0
         ports:
         - containerPort: 8080
         resources:
