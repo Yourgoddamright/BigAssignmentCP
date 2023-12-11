@@ -1,11 +1,9 @@
-# delivery-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: delivery-v0.1.0-dev
   namespace: backend-dev
 spec:
-  restartPolicy: Never
   replicas: 1
   selector:
     matchLabels:
