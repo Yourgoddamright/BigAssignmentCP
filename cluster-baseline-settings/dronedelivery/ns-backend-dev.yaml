@@ -15,8 +15,8 @@ metadata:
   namespace: backend-dev
 spec:
   hard:
-    requests.cpu: "1"
-    requests.memory: 2Gi
-    limits.cpu: "2"
-    limits.memory: 5Gi
-    pods: "5"
+    requests.cpu: "2"
+    requests.memory: 4Gi
+    limits.cpu: "4"
+    limits.memory: 10Gi
+    pods: "10"
